@@ -10,11 +10,11 @@ $passwd = $_POST['passwd'];
 
 if (!isset($username) || !isset($passwd))
 {
-	header("location: ".MAIN_URL."login.php");
+	header("location: http://localhost:8080/mtshakadua/elearning/login.php");
 }
 elseif (empty($username) || empty($passwd))
 {
-	header("location: ".MAIN_URL."login.php");
+	header("location: http://localhost:8080/mtshakadua/elearning/login.php");
 }
 
 else
@@ -30,7 +30,11 @@ else
 		foreach ($data as $row)
 		{
 			$username = $row['user_name'];
-			$sta = $row['level'];
+			$nama = $row['nama_lengkap'];
+			$pass = $row['user_password'];
+			$kelas = strtolower($row['kelas']);
+			$indeks = $row['indeks'];
+			//$sta = $row['status'];
 
 			$log = "INSERT INTO user_log(username, status, halaman) VALUES ('$username', 'login', 'home')";
 			$hasil = $conn->getDb()->query($log);
@@ -38,12 +42,12 @@ else
 			session_start();
 			$_SESSION['username'] = $username;
 			$_SESSION['nama'] = $nama;
-			$_SESSION['status'] = $sta;
+			//$_SESSION['status'] = $sta;
 			header("location: ".MAIN_URL."index.php");
 		}
 	}
 	else
 	{
-		header("location: ".MAIN_URL."login.php");
+		header("location: http://localhost:8080/mtshakadua/elearning/login.php");
 	}
 }

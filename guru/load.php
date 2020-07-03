@@ -11,10 +11,6 @@ if (!isset($_SESSION['username']))
 {
 	header("location: ".MAIN_URL."config.php");
 }
-elseif ($_SESSION['status'] == 2)
-{
-	header("location: ".MAIN_URL."guru");
-}
 else
 {
 	$content = "home.php";
