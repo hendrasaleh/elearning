@@ -30,7 +30,7 @@ $mapel = $hasil->fetchAll();
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <form role="form">
+              <form role="form" method="post" action="test.php" enctype="multipart/form-data">
                 <div class="card-body">
                   <div class="row">
                     <div class="col-sm-6">
@@ -40,6 +40,7 @@ $mapel = $hasil->fetchAll();
                         <select class="form-control" name="level">
                           <option value="7">7</option>
                           <option value="8">8</option>
+                          <option value="9">9</option>
                         </select>
                       </div>
                     </div>
@@ -60,21 +61,21 @@ $mapel = $hasil->fetchAll();
                   </div>
                   <div class="form-group">
                     <label>Video</label>
-                    <input type="text" class="form-control" placeholder="Masukkan link video di sini...">
+                    <input type="text" class="form-control" placeholder="Masukkan link video di sini..." name="video">
                   </div>
                   <div class="form-group">
                     <label>Judul Materi</label>
-                    <input type="text" class="form-control" placeholder="Isi judul materi..">
+                    <input type="text" class="form-control" placeholder="Isi judul materi.." name="judul_materi">
                   </div>
                   <div class="form-group">
                     <label>Deskripsi singkat</label>
-                    <textarea class="form-control" rows="4" placeholder="Masukkan deskripsi singkat untuk materi ini.."></textarea>
+                    <textarea class="form-control" rows="4" placeholder="Masukkan deskripsi singkat untuk materi ini.." name="deskripsi"></textarea>
                   </div>
                   <div class="form-group">
                     <label for="exampleInputFile">File input</label>
                     <div class="input-group">
                       <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="exampleInputFile">
+                        <input type="file" class="custom-file-input" id="exampleInputFile" name="file">
                         <label class="custom-file-label" for="exampleInputFile">Masukkan file materi</label>
                       </div>
                     </div>
@@ -115,9 +116,14 @@ $mapel = $hasil->fetchAll();
                     </tr>
                   </thead>
                   <tbody>
+                    <?php 
+                      $materi = $data->tampilMateribyGuru($username);
+                      $no = 1;
+                      foreach ($materi as $mt) :
+                    ?>
                     <tr>
-                      <td>1</td>
-                      <td>Sejarah Perkembangan Ekonomi Islam</td>
+                      <td><?= $no; ?></td>
+                      <td><?= $mt['materi']; ?></td>
                       <td>
                         <div class="btn-group btn-group-sm">
                           <a href="#" class="btn btn-info"><i class="fas fa-pencil-alt"></i></a>
@@ -125,36 +131,10 @@ $mapel = $hasil->fetchAll();
                         </div>
                       </td>
                     </tr>
-                    <tr>
-                      <td>2</td>
-                      <td>Sejarah Perkembangan Ekonomi Islam</td>
-                      <td>
-                        <div class="btn-group btn-group-sm">
-                          <a href="#" class="btn btn-info"><i class="fas fa-pencil-alt"></i></a>
-                          <a href="#" class="btn btn-danger"><i class="fas fa-trash"></i></a>
-                        </div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>3</td>
-                      <td>Sejarah Perkembangan Ekonomi Islam</td>
-                      <td>
-                        <div class="btn-group btn-group-sm">
-                          <a href="#" class="btn btn-info"><i class="fas fa-pencil-alt"></i></a>
-                          <a href="#" class="btn btn-danger"><i class="fas fa-trash"></i></a>
-                        </div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>4</td>
-                      <td>Sejarah Perkembangan Ekonomi Islam</td>
-                      <td>
-                        <div class="btn-group btn-group-sm">
-                          <a href="#" class="btn btn-info"><i class="fas fa-pencil-alt"></i></a>
-                          <a href="#" class="btn btn-danger"><i class="fas fa-trash"></i></a>
-                        </div>
-                      </td>
-                    </tr>
+                    <?php
+                      $no++;
+                      endforeach;
+                    ?>
                   </tbody>
                 </table>
               </div>
